@@ -15,8 +15,11 @@
     "prepare": "husky",
     "cspell": "cspell --no-must-find-files \"**/*\"",
     "spellcheck": "cspell --no-must-find-files \"**/*\"",
+    "bump-version": "npx tsx scripts/bump-version.ts",
     "gitleaks": "gitleaks protect --staged --redact --verbose",
-    "gitleaks:detect": "gitleaks detect --redact --verbose"
+    "gitleaks:detect": "gitleaks detect --redact --verbose",
+    "semgrep": "semgrep --config=auto .",
+    "trivy": "trivy fs . --severity HIGH,CRITICAL --skip-dirs .next"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "3.90.2",

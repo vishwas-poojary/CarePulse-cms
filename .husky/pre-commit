@@ -1,2 +1,4 @@
+#!/bin/sh
+# Run code quality and security checks before commit
 npx lint-staged
 npm run gitleaks

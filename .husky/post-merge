@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Get current branch
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Only run version bump on specific branches
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ] || [ "$BRANCH" = "stage" ] || [ "$BRANCH" = "dev" ]; then
+    echo "Detected merge to $BRANCH branch"
+    echo "Running automatic version bump..."
+    npm run bump-version
+    
+    # Add the updated version.json to git if it was modified
+    if [ -f "version.json" ]; then
+        git add version.json
+        echo "Updated version.json committed"
+    fi
+else
+    echo "No version bump needed for branch: $BRANCH"
+fi
