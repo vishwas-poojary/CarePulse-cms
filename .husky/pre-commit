@@ -1,4 +1,9 @@
 #!/bin/sh
-# Run code quality and security checks before commit
-npx lint-staged
+# Run security checks defined in package.json
+# npm run security-check
+# Optionally run lint and build if desired
+npm run lint
+npm run build
 npm run gitleaks
+npm run semgrep
+npm run trivy
