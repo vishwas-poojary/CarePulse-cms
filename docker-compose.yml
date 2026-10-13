@@ -3,6 +3,8 @@ version: '3'
 services:
   payload:
     image: node:20-alpine
+    security_opt:
+      - no-new-privileges:true
     ports:
       - '3000:3000'
     volumes:
@@ -19,6 +21,8 @@ services:
   # Ensure your DATABASE_URL uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
   mongo:
     image: mongo:latest
+    security_opt:
+      - no-new-privileges:true
     ports:
       - '27017:27017'
     command:
