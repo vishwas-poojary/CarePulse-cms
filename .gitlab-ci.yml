@@ -1,9 +1,13 @@
+image: node:22
+
 stages:
   - lint
+  - security
+  - semgrep
+  - trivy
   - build
 
 default:
-  image: node:22
   cache:
     key:
       files:
@@ -17,6 +21,43 @@ spellcheck:
   stage: lint
   script:
     - npm run spellcheck
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+gitleaks_scan:
+  stage: security
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  before_script: []
+  script:
+    - gitleaks detect --source . --no-git --redact
+  allow_failure: false
+  only:
+    - main
+
+semgrep_scan:
+  stage: semgrep
+  image: semgrep/semgrep:latest
+  before_script: []
+  script:
+    - semgrep scan --config auto --error .
+  allow_failure: false
+  only:
+    - main
+
+trivy_sca:
+  stage: trivy
+  image:
+    name: aquasec/trivy:0.69.3
+    entrypoint: [""]
+  before_script: []
+  script:
+    - echo "Trivy SCA scan (dependencies only)"
+    - trivy fs . --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --no-progress
+  allow_failure: false
+  only:
+    - main
 
 build:
   stage: build

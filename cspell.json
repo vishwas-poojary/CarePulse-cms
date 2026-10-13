@@ -24,6 +24,7 @@
   "words": [
     "addgroup",
     "adduser",
+    "aquasec",
     "Aris",
     "carepulse",
     "Carepulse",
@@ -37,6 +38,7 @@
     "FAAP",
     "FACC",
     "FACS",
+    "gitleaks",
     "gitlab",
     "importmap",
     "Kolkata",
@@ -61,6 +63,7 @@
     "tsx",
     "turbopack",
     "vercel",
-    "vitest"
+    "vitest",
+    "zricethezav"
   ]
 }
